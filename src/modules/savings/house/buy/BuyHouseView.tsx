@@ -118,7 +118,7 @@ const BuyHouseView: React.FC<BuyHouseViewProps> = ({
                     thousandSeparator=","
                     displayType="text"
                     decimalScale={0}
-                    value={monthlyAmount}
+                    value={amount}
                   />
                 </strong>{' '}
                 goal by <strong>{format(goalDate, 'MMMM yyyy')}</strong>.
