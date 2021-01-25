@@ -1,4 +1,6 @@
 import * as React from 'react';
+import NumberFormat from 'react-number-format';
+import { format } from 'date-fns';
 
 import houseIcon from '../../../../assets/icons/house.svg';
 import dollarIcon from '../../../../assets/icons/dollar.svg';
@@ -23,7 +25,25 @@ import {
   Footer
 } from './BuyHouseStyles';
 
-const BuyHouseView: React.FC = () => {
+interface BuyHouseViewProps {
+  amount: number;
+  monthlyAmount: number;
+  goalDate: Date;
+  howManyMonths: number;
+  changeAmount(newAmount: number): void;
+  addMonthToGoalDate(): void;
+  subMonthToGoalDate(): void;
+}
+
+const BuyHouseView: React.FC<BuyHouseViewProps> = ({
+  amount,
+  monthlyAmount,
+  goalDate,
+  howManyMonths,
+  addMonthToGoalDate,
+  subMonthToGoalDate,
+  changeAmount
+}) => {
   return (
     <Page>
       <Greetings>
@@ -46,31 +66,62 @@ const BuyHouseView: React.FC = () => {
               <p>Total amount</p>
               <MoneyInput>
                 <img src={dollarIcon} alt="Dollar sign" />
-                <input type="number" defaultValue={25000} />
+                <NumberFormat
+                  thousandSeparator=","
+                  allowNegative={false}
+                  value={amount}
+                  decimalScale={0}
+                  onValueChange={({ floatValue }) => changeAmount(floatValue)}
+                />
               </MoneyInput>
             </TotalAmount>
             <Goal>
               <p>Reach goal by</p>
               <DateInput>
-                <img src={arrowIcon} alt="Arrow aiming left" />
+                <img
+                  src={arrowIcon}
+                  alt="Arrow aiming left"
+                  onClick={subMonthToGoalDate}
+                />
                 <Date>
-                  <h1>October</h1>
-                  <p>2021</p>
+                  <h1>{format(goalDate, 'MMMM')}</h1>
+                  <p>{format(goalDate, 'yyyy')}</p>
                 </Date>
-                <img src={arrowIcon} alt="Arrow aiming right" />
+                <img
+                  src={arrowIcon}
+                  alt="Arrow aiming right"
+                  onClick={addMonthToGoalDate}
+                />
               </DateInput>
             </Goal>
           </Form>
           <Feedback>
             <Amount>
               <p>Monthly amount</p>
-              <strong>$521</strong>
+              <strong>
+                <NumberFormat
+                  prefix="$"
+                  thousandSeparator=","
+                  displayType="text"
+                  decimalScale={0}
+                  value={monthlyAmount}
+                />
+              </strong>
             </Amount>
             <Message>
               <p>
-                You’re planning <strong>48 monthly deposits</strong> to reach
-                your <strong>$25,000</strong> goal by{' '}
-                <strong>October 2020</strong>.
+                You’re planning{' '}
+                <strong>{howManyMonths} monthly deposits</strong> to reach your{' '}
+                <strong>
+                  <NumberFormat
+                    prefix="$"
+                    thousandSeparator=","
+                    displayType="text"
+                    decimalScale={0}
+                    value={monthlyAmount}
+                  />
+                </strong>{' '}
+                goal by <strong>{format(goalDate, 'MMMM yyyy')}</strong>.
               </p>
             </Message>
           </Feedback>

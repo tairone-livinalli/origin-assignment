@@ -5,8 +5,10 @@
   "main": "src/index.ts",
   "dependencies": {
     "acorn": "^7.1.1",
+    "date-fns": "^2.16.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-number-format": "^4.4.4",
     "styled-components": "^4.4.1"
   },
   "devDependencies": {
