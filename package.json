@@ -4,6 +4,7 @@
   "description": "Origin Frontend Challenge",
   "main": "src/index.ts",
   "dependencies": {
+    "@testing-library/react-hooks": "^5.0.3",
     "acorn": "^7.1.1",
     "date-fns": "^2.16.1",
     "react": "^16.13.1",
