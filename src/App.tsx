@@ -1,7 +1,17 @@
 import * as React from 'react';
 
-const App: React.FunctionComponent = () => {
-  return <div>Origin Frontend Take Home</div>;
+import Header from './_common/components/header';
+import BuyHouse from './modules/savings/house/buy';
+import GlobalStyle from './_common/styles/global';
+
+const App: React.FC = () => {
+  return (
+    <>
+      <Header />
+      <BuyHouse />
+      <GlobalStyle />
+    </>
+  );
 };
 
 export default App;
